@@ -1,14 +1,3 @@
-# qshot
-Is an example application from Qt 5.11 base package (https://github.com/qt/qtbase/blob/5.11/examples/widgets/desktop/screenshot/).
-The Screenshot example shows how to take a screenshot of the desktop.
-With the application the users can take a screenshot of their desktop. They are provided with a couple of options:
-
-    Delaying the screenshot, giving them time to rearrange their desktop.
-    Hiding the application's window while the screenshot is taken.
-
-In addition the application allows the users to save their screenshot if they want to.
-
-## License
 /****************************************************************************
 **
 ** Copyright (C) 2016 The Qt Company Ltd.
@@ -59,5 +48,50 @@ In addition the application allows the users to save their screenshot if they wa
 **
 ****************************************************************************/
 
-## Sources
-This source is optimized and debianized for Maemo-Leste.
+#ifndef SCREENSHOT_H
+#define SCREENSHOT_H
+
+#include <QPixmap>
+#include <QWidget>
+
+QT_BEGIN_NAMESPACE
+class QCheckBox;
+class QGridLayout;
+class QGroupBox;
+class QHBoxLayout;
+class QLabel;
+class QPushButton;
+class QSpinBox;
+class QVBoxLayout;
+QT_END_NAMESPACE
+
+//! [0]
+class Screenshot : public QWidget
+{
+    Q_OBJECT
+
+public:
+    Screenshot();
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
+private slots:
+    void newScreenshot();
+    void saveScreenshot();
+    void shootScreen();
+    void updateCheckBox();
+
+private:
+    void updateScreenshotLabel();
+
+    QPixmap originalPixmap;
+
+    QLabel *screenshotLabel;
+    QSpinBox *delaySpinBox;
+    QCheckBox *hideThisWindowCheckBox;
+    QPushButton *newScreenshotButton;
+};
+//! [0]
+
+#endif // SCREENSHOT_H

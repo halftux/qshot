@@ -1,14 +1,3 @@
-# qshot
-Is an example application from Qt 5.11 base package (https://github.com/qt/qtbase/blob/5.11/examples/widgets/desktop/screenshot/).
-The Screenshot example shows how to take a screenshot of the desktop.
-With the application the users can take a screenshot of their desktop. They are provided with a couple of options:
-
-    Delaying the screenshot, giving them time to rearrange their desktop.
-    Hiding the application's window while the screenshot is taken.
-
-In addition the application allows the users to save their screenshot if they want to.
-
-## License
 /****************************************************************************
 **
 ** Copyright (C) 2016 The Qt Company Ltd.
@@ -59,5 +48,17 @@ In addition the application allows the users to save their screenshot if they wa
 **
 ****************************************************************************/
 
-## Sources
-This source is optimized and debianized for Maemo-Leste.
+#include <QApplication>
+#include <QDesktopWidget>
+
+#include "screenshot.h"
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+
+    Screenshot screenshot;
+    //screenshot.move(QApplication::desktop()->availableGeometry(&screenshot).topLeft() + QPoint(20, 20));
+    screenshot.show();
+    return app.exec();
+}
